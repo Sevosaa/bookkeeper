@@ -38,6 +38,8 @@ class SQLiteRepository(AbstractRepository[T]):
         return obj.pk
 
     def __generate_object(self, db_row: tuple) -> T:
+        print(self.fields)
+        print(db_row)
         obj = self.cls(self.fields)
         for field, value in zip(self.fields, db_row[1:]):
             setattr(obj, field, value)
@@ -72,9 +74,8 @@ class SQLiteRepository(AbstractRepository[T]):
             cur.execute(query, values)
             rows = cur.fetchall()
 
-        if not rows:
+        if not rows or len(rows) == 0:
             return []
-
         return [self.__generate_object(row) for row in rows]
 
     def update(self, obj: T) -> None:

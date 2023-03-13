@@ -5,7 +5,7 @@
 from itertools import count
 from typing import Any
 
-from bookkeeper.repository.abstract_repository import AbstractRepository, T
+from repository.abstract_repository import AbstractRepository, T
 
 
 class MemoryRepository(AbstractRepository[T]):
